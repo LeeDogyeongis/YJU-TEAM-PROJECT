@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.*; 
 
 public class Main extends JFrame implements Runnable, KeyListener {
        
