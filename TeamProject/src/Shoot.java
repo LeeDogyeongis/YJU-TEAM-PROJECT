@@ -14,7 +14,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         private static BufferedImage background = null, plane = null, png = null, bullet = null;
         private boolean left = false, right = false, up = false, down = false, fire = false;
         private boolean start = false, end = false;
-        private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20, life = 3;
+        private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20, life = 3, sum = 0;
 
 
 
@@ -92,6 +92,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
            if(p.intersects((double)e.x, (double)e.y, (double)e.w, (double)e.h)) {
             msList.remove(i);
             enList.remove(j);
+	  sum += 50;
            }
           }
          }
@@ -108,6 +109,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          if(life == 0) {
             start = false; 
             end = true;
+	  sum = 0;
           }
          }
         }
