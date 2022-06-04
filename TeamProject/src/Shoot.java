@@ -11,7 +11,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         private BufferedImage bi = null;
         private ArrayList msList = null;
         private ArrayList enList = null;
-        private static BufferedImage background = null, plane = null;
+        private static BufferedImage background = null, plane = null, png = null, bullet = null;
         private boolean left = false, right = false, up = false, down = false, fire = false;
         private boolean start = false, end = false;
         private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20;
@@ -30,6 +30,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          this.setVisible(true); 
          try {
           plane = ImageIO.read(new File("image\\my_plane.png"));
+          bullet = ImageIO.read(new File("image\\bullet.png"));
           background = ImageIO.read(new File("image\\back.png"));
        } catch (IOException e) { }
     }   
@@ -123,14 +124,13 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
           gs.drawImage(plane, x, y, null);
          
          
-         
           
-         for(int i = 0; i < msList.size(); i++) {
-          Ms m = (Ms)msList.get(i);
-          gs.setColor(Color.blue);
-          gs.drawOval(m.x, m.y, m.w, m.h);
-          if(m.y < 0) msList.remove(i);
-          m.moveMs();
+         for(int i = 0; i < msList.size(); i++) { // 기본 총알의 피격 판정 범위 설정
+           Ms m = (Ms)msList.get(i);
+           gs.setColor(Color.blue);
+           gs.drawImage(bullet, m.x+33, m.y-15, null);
+           if(m.y < 0) msList.remove(i);
+           m.moveMs();
          }
          gs.setColor(Color.black);
          for(int i = 0; i < enList.size(); i++) {
@@ -211,21 +211,20 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         }
        }
        class Ms {
-        int x;
-        int y;
-        int w = 5;
-        int h = 5;
+        int x = 20;
+        int y = 20;
+        int w = 20;
+        int h = 20;
         public Ms(int x, int y) {
          this.x = x;
          this.y = y;
         }
-        public void moveMs() {
-         y--;
-        }
+        public void moveMs() { y-=5; }     
+        
        }
        class Enemy2 {
-        int x;
-        int y;
+        int x = 10;
+        int y = 10;
         int w = 10;
         int h = 10;
         public Enemy2(int x, int y) {
