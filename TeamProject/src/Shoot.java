@@ -31,6 +31,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          try {
           plane = ImageIO.read(new File("image\\my_plane.png"));
           bullet = ImageIO.read(new File("image\\bullet.png"));
+          png = ImageIO.read(new File("image\\en_plane.png"));     
           background = ImageIO.read(new File("image\\back.png"));
        } catch (IOException e) { }
     }   
@@ -138,7 +139,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
           gs.drawString("Single", 15, 70);
           gs.drawImage(plane, x, y, null);
          
-         
+
           
          for(int i = 0; i < msList.size(); i++) { // 기본 총알의 피격 판정 범위 설정
            Ms m = (Ms)msList.get(i);
@@ -150,7 +151,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          gs.setColor(Color.black);
          for(int i = 0; i < enList.size(); i++) {
           Enemy2 e = (Enemy2)enList.get(i);
-          gs.fillRect(e.x, e.y, e.w, e.h);
+          gs.drawImage(png, e.x, e.y, null);
           if(e.y > h) enList.remove(i);
           e.moveEn();
          }
@@ -238,10 +239,10 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         
        }
        class Enemy2 {
-        int x = 10;
-        int y = 10;
-        int w = 10;
-        int h = 10;
+        int x = 40;
+        int y = 30;
+        int w = 30;
+        int h = 30;
         public Enemy2(int x, int y) {
          this.x = x;
          this.y = y;
