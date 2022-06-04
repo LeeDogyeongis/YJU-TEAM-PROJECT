@@ -53,7 +53,15 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
              msCnt = 0;
             }
             msCnt += 10;
+            if(sum >= 0 && sum < 500) 
             enCnt += 10;
+            else if(sum >= 500 && sum < 1000)
+               enCnt += 20;
+               else if(sum >= 1000 && sum < 2000)
+                  enCnt += 30;      // 난이도 구현 완료
+         else
+            enCnt += 100;
+            
             keyControl();
             crashChk();
            }
@@ -129,6 +137,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
           gs.drawString("G A M E     O V E R", 120, 250);
           gs.drawString("Single", 15, 70);
           gs.drawImage(plane, x, y, null);
+         
          
           
          for(int i = 0; i < msList.size(); i++) { // 기본 총알의 피격 판정 범위 설정
