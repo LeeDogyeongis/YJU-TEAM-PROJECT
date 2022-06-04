@@ -14,7 +14,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         private static BufferedImage background = null, plane = null, png = null, bullet = null;
         private boolean left = false, right = false, up = false, down = false, fire = false;
         private boolean start = false, end = false;
-        private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20;
+        private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20, life = 3;
 
 
 
@@ -100,27 +100,32 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
           int[] xpoints = {x, (x + xw), (x + xw), x};
           int[] ypoints = {y, y, (y + xh), (y + xh)};
           p = new Polygon(xpoints, ypoints, 4);
-          if(p.intersects((double)e.x, (double)e.y, (double)e.w, (double)e.h)) {
+          if(p.intersects((double)e.x-30, (double)e.y, (double)e.w, (double)e.h)) {
            enList.remove(i);
-           start = false;
-           end = true;
+         if(life != 0) {
+            --life;
+         }
+         if(life == 0) {
+            start = false; 
+            end = true;
           }
          }
         }
-        
+       }  
         public void draw() {
          Graphics gs = bi.getGraphics();
          gs.setColor(Color.white);
          gs.fillRect(0, 0, w, h);
          gs.setColor(Color.black);
          gs.drawImage(background, 0, 0, this);
-         gs.drawString("Enemy 객체수 : " + enList.size(), 15, 60);
-         gs.drawString("Ms 객체수 : " + msList.size(), 15, 80);
-         gs.drawString("게임시작 : Enter", 15, 100);
+         gs.setColor(Color.white);
+        gs.setFont(new Font("Pixeboy", Font.PLAIN, 40));
+        gs.drawString(sum+"", 15, 110);
+        gs.drawString("LIFE : " + life, 450, 70);
          
          if(end) 
           gs.drawString("G A M E     O V E R", 250, 300);
-         
+          gs.drawString("Single", 15, 70);
           gs.drawImage(plane, x, y, null);
          
          
