@@ -92,7 +92,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
            if(p.intersects((double)e.x, (double)e.y, (double)e.w, (double)e.h)) {
             msList.remove(i);
             enList.remove(j);
-	  sum += 50;
+            sum += 50;
            }
           }
          }
@@ -109,7 +109,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          if(life == 0) {
             start = false; 
             end = true;
-	  sum = 0;
+            sum = 0;
           }
          }
         }
@@ -126,10 +126,9 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         gs.drawString("LIFE : " + life, 450, 70);
          
          if(end) 
-          gs.drawString("G A M E     O V E R", 250, 300);
+          gs.drawString("G A M E     O V E R", 120, 250);
           gs.drawString("Single", 15, 70);
           gs.drawImage(plane, x, y, null);
-         
          
           
          for(int i = 0; i < msList.size(); i++) { // 기본 총알의 피격 판정 범위 설정
