@@ -11,7 +11,7 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
         private BufferedImage bi = null;
         private ArrayList msList = null;
         private ArrayList enList = null;
-        private static BufferedImage background = null;
+        private static BufferedImage background = null, plane = null;
         private boolean left = false, right = false, up = false, down = false, fire = false;
         private boolean start = false, end = false;
         private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20;
@@ -29,9 +29,8 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          this.setVisible(true); 
          try {
-    
+          plane = ImageIO.read(new File("image\\my_plane.png"));
           background = ImageIO.read(new File("image\\back.png"));
-          
        } catch (IOException e) { }
     }   
         
@@ -118,11 +117,13 @@ public class Shoot extends JFrame implements Runnable, KeyListener {
          gs.drawString("Ms 객체수 : " + msList.size(), 15, 80);
          gs.drawString("게임시작 : Enter", 15, 100);
          
-         if(end) {
+         if(end) 
           gs.drawString("G A M E     O V E R", 250, 300);
-         }
          
-         gs.fillRect(x, y, xw, xh);
+          gs.drawImage(plane, x, y, null);
+         
+         
+         
           
          for(int i = 0; i < msList.size(); i++) {
           Ms m = (Ms)msList.get(i);
