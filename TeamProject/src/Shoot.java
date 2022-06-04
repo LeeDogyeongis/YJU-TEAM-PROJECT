@@ -1,22 +1,24 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
-import java.util.ArrayList;
-import javax.swing.*;
+import java.io.*;
+import java.util.*;
+import javax.imageio.*;
+import javax.swing.*; 
 
-public class Main extends JFrame implements Runnable, KeyListener {
+public class Shoot extends JFrame implements Runnable, KeyListener {
        
         private BufferedImage bi = null;
         private ArrayList msList = null;
         private ArrayList enList = null;
+        private static BufferedImage background = null;
         private boolean left = false, right = false, up = false, down = false, fire = false;
         private boolean start = false, end = false;
-        private int w = 300, h = 500, x = 130, y = 450, xw = 20, xh = 20;
-      
+        private static int w = 600, h = 600, x = 250, y = 500, xw = 20, xh = 20;
 
 
 
-        public Main() {
+        public Shoot() {
          bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
          msList = new ArrayList();
          enList = new ArrayList();
@@ -25,8 +27,14 @@ public class Main extends JFrame implements Runnable, KeyListener {
          this.setTitle("Shooting Game");
          this.setResizable(false);
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         this.setVisible(true);  
-        }
+         this.setVisible(true); 
+         try {
+    
+          background = ImageIO.read(new File("image\\back.png"));
+          
+       } catch (IOException e) { }
+    }   
+        
         
         public void run() {
          try {
@@ -105,12 +113,13 @@ public class Main extends JFrame implements Runnable, KeyListener {
          gs.setColor(Color.white);
          gs.fillRect(0, 0, w, h);
          gs.setColor(Color.black);
-         gs.drawString("Enemy 객체수 : " + enList.size(), 180, 50);
-         gs.drawString("Ms 객체수 : " + msList.size(), 180, 70);
-         gs.drawString("게임시작 : Enter", 180, 90);
+         gs.drawImage(background, 0, 0, this);
+         gs.drawString("Enemy 객체수 : " + enList.size(), 15, 60);
+         gs.drawString("Ms 객체수 : " + msList.size(), 15, 80);
+         gs.drawString("게임시작 : Enter", 15, 100);
          
          if(end) {
-          gs.drawString("G A M E     O V E R", 100, 250);
+          gs.drawString("G A M E     O V E R", 250, 300);
          }
          
          gs.fillRect(x, y, xw, xh);
@@ -196,7 +205,7 @@ public class Main extends JFrame implements Runnable, KeyListener {
         public void keyTyped(KeyEvent ke) {}
         
         public static void main(String[] args) {
-         Thread t = new Thread(new Main());
+         Thread t = new Thread(new Shoot());
          t.start();
         }
        }
